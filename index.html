@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramoel T. Bello | Cybersecurity Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080c10;
+      --bg2: #0d1117;
+      --bg3: #111820;
+      --green: #00ff88;
+      --green-dim: #00cc6a;
+      --green-muted: rgba(0,255,136,0.08);
+      --green-border: rgba(0,255,136,0.2);
+      --cyan: #00d4ff;
+      --text: #c9d1d9;
+      --text-dim: #6e7681;
+      --card: #0d1117;
+      --card-border: rgba(255,255,255,0.06);
+      --mono: 'Share Tech Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(8,12,16,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--green);
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--green);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--green-border);
+      border-radius: 2px;
+      background: var(--green-muted);
+    }
+
+    .hero-tag::before {
+      content: '>';
+      font-size: 0.9rem;
+      animation: blink 1.2s step-end infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero h1 {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 span { color: var(--green); }
+
+    .hero-sub {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.75;
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dim);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+
+    .btn-outline:hover {
+      background: var(--green-muted);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--green-border), transparent);
+      margin-bottom: 3rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--green-border);
+      transform: translateY(-2px);
+    }
+
+    .skill-category {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      color: var(--text);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--green-border);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card.featured {
+      border-color: var(--green-border);
+      background: linear-gradient(135deg, var(--bg2) 0%, rgba(0,255,136,0.03) 100%);
+    }
+
+    .project-card.featured::before { opacity: 1; }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      width: fit-content;
+    }
+
+    .badge-featured { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid var(--green-border); }
+    .badge-writeup { background: rgba(0,212,255,0.08); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+
+    .project-tech {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .tech-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.5rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 2px;
+      color: var(--text-dim);
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .project-link:hover { opacity: 0.7; }
+
+    /* ── FEATURED WAZUH ── */
+    .wazuh-card {
+      background: var(--bg2);
+      border: 1px solid var(--green-border);
+      border-radius: 4px;
+      padding: 2.4rem;
+      margin-bottom: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wazuh-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--cyan), transparent);
+    }
+
+    .wazuh-card::after {
+      content: 'SOC';
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--mono);
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(0,255,136,0.04);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+    }
+
+    .wazuh-meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--green);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .wazuh-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+
+    .wazuh-desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 1.4rem;
+    }
+
+    .wazuh-tech {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--card-border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    .footer-left span { color: var(--green); }
+
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+    .fade-in:nth-child(4) { animation-delay: 0.4s; }
+    .fade-in:nth-child(5) { animation-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .wazuh-card { grid-template-columns: 1fr; }
+      .wazuh-card::after { display: none; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">rtb@portfolio:~$</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#writeups">Writeups</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag fade-in">BSIT Student &nbsp;·&nbsp; 3BSIT-5 &nbsp;·&nbsp; S.Y. 2025–2026</div>
+      <h1 class="fade-in">Ramoel T.<br /><span>Bello</span></h1>
+      <p class="hero-sub fade-in">// Cybersecurity &nbsp;·&nbsp; SOC Lab &nbsp;·&nbsp; Web Security Research</p>
+      <p class="hero-desc fade-in">
+        Bachelor of Science in Information Technology student with hands-on experience in
+        SOC environments, SIEM deployment, and web application vulnerability research.
+        Passionate about building secure systems and understanding how they break.
+      </p>
+      <div class="hero-cta fade-in">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="https://github.com/Caspianity" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">// 01</div>
+    <h2 class="section-title">Skills & Tools</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-category">Security Operations</div>
+        <div class="skill-tags">
+          <span class="tag">Wazuh SIEM</span>
+          <span class="tag">Log Analysis</span>
+          <span class="tag">Threat Detection</span>
+          <span class="tag">Incident Response</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Web Security</div>
+        <div class="skill-tags">
+          <span class="tag">SQL Injection</span>
+          <span class="tag">SSRF</span>
+          <span class="tag">Info Disclosure</span>
+          <span class="tag">Access Control</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Systems & Networking</div>
+        <div class="skill-tags">
+          <span class="tag">Linux</span>
+          <span class="tag">Virtualization</span>
+          <span class="tag">Network Protocols</span>
+          <span class="tag">Firewall Config</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Development & Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Git / GitHub</span>
+          <span class="tag">Markdown</span>
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">Bash Scripting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">// 02</div>
+    <h2 class="section-title">Featured Project</h2>
+    <div class="section-divider"></div>
+
+    <!-- WAZUH FEATURED -->
+    <div class="wazuh-card">
+      <div>
+        <div class="wazuh-meta">★ Featured &nbsp;·&nbsp; SOC Lab</div>
+        <div class="wazuh-title">Wazuh SOC Lab Installation</div>
+        <p class="wazuh-desc">
+          A complete hands-on SOC (Security Operations Center) lab built around Wazuh —
+          an open-source SIEM and XDR platform. The repository documents the full
+          installation, configuration, and agent deployment process, serving as a
+          practical reference for setting up enterprise-grade security monitoring.
+        </p>
+        <div class="wazuh-tech">
+          <span class="tag">Wazuh</span>
+          <span class="tag">SIEM</span>
+          <span class="tag">XDR</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Security Monitoring</span>
+          <span class="tag">Agent Deployment</span>
+        </div>
+        <br />
+        <a href="https://github.com/Caspianity/wazuh-soc-lab" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:0.5rem">View on GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITEUPS -->
+  <section id="writeups">
+    <div class="section-label">// 03</div>
+    <h2 class="section-title">Security Writeups</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
+        <div class="project-title">SQL Injection</div>
+        <p class="project-desc">
+          Detailed walkthrough of SQL injection vulnerabilities — covering attack vectors,
+          exploitation techniques, and mitigation strategies through hands-on lab exercises.
+        </p>
+        <div class="project-footer">
+          <div class="project-tech">
+            <span class="tech-tag">SQLi</span>
+            <span class="tech-tag">Database</span>
+            <span class="tech-tag">OWASP</span>
+          </div>
+          <a href="SQL.pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
+        <div class="project-title">Server-Side Request Forgery (SSRF)</div>
+        <p class="project-desc">
+          Exploration of SSRF vulnerabilities that allow attackers to induce
+          server-side applications to make requests to unintended locations, including
+          internal services and cloud metadata endpoints.
+        </p>
+        <div class="project-footer">
+          <div class="project-tech">
+            <span class="tech-tag">SSRF</span>
+            <span class="tech-tag">Web Security</span>
+            <span class="tech-tag">OWASP</span>
+          </div>
+          <a href="SSRF.pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge badge-writeup">Vulnerability &nbsp;·&nbsp; Writeup</div>
+        <div class="project-title">Vulnerability Research Report</div>
+        <p class="project-desc">
+          A structured vulnerability research report documenting the discovery,
+          analysis, and reporting of security weaknesses found during security
+          assessment exercises.
+        </p>
+        <div class="project-footer">
+          <div class="project-tech">
+            <span class="tech-tag">Research</span>
+            <span class="tech-tag">Reporting</span>
+            <span class="tech-tag">CVE</span>
+          </div>
+          <a href="TVR.pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
+        <div class="project-title">Unprotected Admin Functionality</div>
+        <p class="project-desc">
+          Analysis of broken access control vulnerabilities where administrative
+          functionality is exposed without proper authentication or authorization
+          enforcement, enabling privilege escalation attacks.
+        </p>
+        <div class="project-footer">
+          <div class="project-tech">
+            <span class="tech-tag">Access Control</span>
+            <span class="tech-tag">Privilege Escalation</span>
+            <span class="tech-tag">OWASP</span>
+          </div>
+          <a href="UnprotectedAdminFunc.pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
+        <div class="project-title">Information Disclosure</div>
+        <p class="project-desc">
+          Comprehensive writeup on information disclosure vulnerabilities — where
+          applications unintentionally reveal sensitive data to users, including
+          source code, credentials, internal paths, and error messages.
+        </p>
+        <div class="project-footer">
+          <div class="project-tech">
+            <span class="tech-tag">Info Disclosure</span>
+            <span class="tech-tag">Recon</span>
+            <span class="tech-tag">OWASP</span>
+          </div>
+          <a href="InfoDisclosure.pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <span>Ramoel T. Bello</span> &nbsp;·&nbsp; 3BSIT-5 &nbsp;·&nbsp; S.Y. 2025–2026
+    </div>
+    <div class="footer-right">
+      Built with HTML/CSS &nbsp;·&nbsp; Hosted on Vercel
+    </div>
+  </footer>
+
+</body>
+</html>
