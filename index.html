@@ -36,7 +36,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -47,7 +46,6 @@
       opacity: 0.4;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -86,7 +84,6 @@
 
     .nav-links a:hover { color: var(--green); }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -220,7 +217,6 @@
       transform: translateY(-1px);
     }
 
-    /* ── SECTIONS ── */
     section {
       position: relative;
       z-index: 1;
@@ -253,7 +249,6 @@
       margin-bottom: 3rem;
     }
 
-    /* ── SKILLS ── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -298,7 +293,6 @@
       color: var(--text);
     }
 
-    /* ── PROJECTS ── */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -335,13 +329,6 @@
 
     .project-card:hover::before { opacity: 1; }
 
-    .project-card.featured {
-      border-color: var(--green-border);
-      background: linear-gradient(135deg, var(--bg2) 0%, rgba(0,255,136,0.03) 100%);
-    }
-
-    .project-card.featured::before { opacity: 1; }
-
     .project-badge {
       display: inline-flex;
       align-items: center;
@@ -355,7 +342,6 @@
       width: fit-content;
     }
 
-    .badge-featured { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid var(--green-border); }
     .badge-writeup { background: rgba(0,212,255,0.08); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
 
     .project-title {
@@ -410,7 +396,6 @@
 
     .project-link:hover { opacity: 0.7; }
 
-    /* ── FEATURED WAZUH ── */
     .wazuh-card {
       background: var(--bg2);
       border: 1px solid var(--green-border);
@@ -478,7 +463,6 @@
       flex-wrap: wrap;
     }
 
-    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
@@ -503,7 +487,6 @@
       color: var(--text-dim);
     }
 
-    /* ── ANIMATIONS ── */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -520,7 +503,91 @@
     .fade-in:nth-child(4) { animation-delay: 0.4s; }
     .fade-in:nth-child(5) { animation-delay: 0.5s; }
 
-    /* ── RESPONSIVE ── */
+    .writeups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .writeup-card {
+      background: var(--bg2);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .writeup-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .writeup-card:hover {
+      border-color: rgba(0,212,255,0.25);
+      transform: translateY(-3px);
+    }
+
+    .writeup-card:hover::before { opacity: 1; }
+
+    .writeup-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .writeup-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .vuln-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      flex: 1;
+    }
+
+    .vuln-list li {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .vuln-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+      opacity: 0.6;
+    }
+
+    .writeup-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1.2rem; }
@@ -534,7 +601,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">rtb@portfolio:~$</div>
     <ul class="nav-links">
@@ -544,12 +610,11 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <div class="hero-tag fade-in">BSIT Student &nbsp;·&nbsp; 3BSIT-5 &nbsp;·&nbsp; S.Y. 2025–2026</div>
+      <div class="hero-tag fade-in">BSIT Student &nbsp;·&nbsp; 4BSIT-3 &nbsp;·&nbsp; S.Y. 2025–2026</div>
       <h1 class="fade-in">Ramoel T.<br /><span>Bello</span></h1>
       <p class="hero-sub fade-in">// Cybersecurity &nbsp;·&nbsp; SOC Lab &nbsp;·&nbsp; Web Security Research</p>
       <p class="hero-desc fade-in">
@@ -564,7 +629,6 @@
     </div>
   </div>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="section-label">// 01</div>
     <h2 class="section-title">Skills & Tools</h2>
@@ -582,7 +646,7 @@
       <div class="skill-card">
         <div class="skill-category">Web Security</div>
         <div class="skill-tags">
-          <span class="tag">SQL Injection</span>
+          <span class="tag">CSRF</span>
           <span class="tag">SSRF</span>
           <span class="tag">Info Disclosure</span>
           <span class="tag">Access Control</span>
@@ -609,13 +673,10 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
     <div class="section-label">// 02</div>
     <h2 class="section-title">Featured Project</h2>
     <div class="section-divider"></div>
-
-    <!-- WAZUH FEATURED -->
     <div class="wazuh-card">
       <div>
         <div class="wazuh-meta">★ Featured &nbsp;·&nbsp; SOC Lab</div>
@@ -640,109 +701,120 @@
     </div>
   </section>
 
-  <!-- WRITEUPS -->
   <section id="writeups">
     <div class="section-label">// 03</div>
     <h2 class="section-title">Security Writeups</h2>
     <div class="section-divider"></div>
-    <div class="projects-grid">
+    <div class="writeups-grid">
 
-      <div class="project-card">
-        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
-        <div class="project-title">SQL Injection</div>
-        <p class="project-desc">
-          Detailed walkthrough of SQL injection vulnerabilities — covering attack vectors,
-          exploitation techniques, and mitigation strategies through hands-on lab exercises.
-        </p>
-        <div class="project-footer">
-          <div class="project-tech">
-            <span class="tech-tag">SQLi</span>
-            <span class="tech-tag">Database</span>
-            <span class="tech-tag">OWASP</span>
+      <!-- CSRF -->
+      <div class="writeup-card">
+        <div class="writeup-header">
+          <div>
+            <div class="project-badge badge-writeup" style="margin-bottom:0.8rem">8 Reports &nbsp;·&nbsp; Writeup</div>
+            <div class="writeup-title">CSRF, Clickjacking, CORS & XXE</div>
           </div>
-          <a href="SQL.pdf" target="_blank" class="project-link">PDF ↗</a>
+          <a href="Cross%20Site%20Forgery%20(CSRF).pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+        <ul class="vuln-list">
+          <li><span class="vuln-dot"></span>Cross Site Request Forgery (CSRF)</li>
+          <li><span class="vuln-dot"></span>Basic Clickjacking with CSRF Token Protection</li>
+          <li><span class="vuln-dot"></span>Clickjacking with Form Input Data Prefilled from a URL</li>
+          <li><span class="vuln-dot"></span>Clickjacking with a Frame Buster Script</li>
+          <li><span class="vuln-dot"></span>CORS Vulnerability with Basic Origin Reflection</li>
+          <li><span class="vuln-dot"></span>CORS Vulnerability with Trusted Null Origin</li>
+          <li><span class="vuln-dot"></span>XXE Using External Entities to Retrieve Files</li>
+          <li><span class="vuln-dot"></span>Exploiting XXE to Perform SSRF Attacks</li>
+        </ul>
+        <div class="writeup-tags">
+          <span class="tech-tag">CSRF</span>
+          <span class="tech-tag">Clickjacking</span>
+          <span class="tech-tag">CORS</span>
+          <span class="tech-tag">XXE</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
-        <div class="project-title">Server-Side Request Forgery (SSRF)</div>
-        <p class="project-desc">
-          Exploration of SSRF vulnerabilities that allow attackers to induce
-          server-side applications to make requests to unintended locations, including
-          internal services and cloud metadata endpoints.
-        </p>
-        <div class="project-footer">
-          <div class="project-tech">
-            <span class="tech-tag">SSRF</span>
-            <span class="tech-tag">Web Security</span>
-            <span class="tech-tag">OWASP</span>
+      <!-- SSRF -->
+      <div class="writeup-card">
+        <div class="writeup-header">
+          <div>
+            <div class="project-badge badge-writeup" style="margin-bottom:0.8rem">4 Reports &nbsp;·&nbsp; Writeup</div>
+            <div class="writeup-title">SSRF, Command Injection & Path Traversal</div>
           </div>
           <a href="SSRF.pdf" target="_blank" class="project-link">PDF ↗</a>
         </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-badge badge-writeup">Vulnerability &nbsp;·&nbsp; Writeup</div>
-        <div class="project-title">Vulnerability Research Report</div>
-        <p class="project-desc">
-          A structured vulnerability research report documenting the discovery,
-          analysis, and reporting of security weaknesses found during security
-          assessment exercises.
-        </p>
-        <div class="project-footer">
-          <div class="project-tech">
-            <span class="tech-tag">Research</span>
-            <span class="tech-tag">Reporting</span>
-            <span class="tech-tag">CVE</span>
-          </div>
-          <a href="TVR.pdf" target="_blank" class="project-link">PDF ↗</a>
+        <ul class="vuln-list">
+          <li><span class="vuln-dot"></span>SSRF — Local Server Access</li>
+          <li><span class="vuln-dot"></span>SSRF — Unauthorized Access to Back-End Systems</li>
+          <li><span class="vuln-dot"></span>OS Command Injection</li>
+          <li><span class="vuln-dot"></span>File Path Traversal — Arbitrary File Access</li>
+        </ul>
+        <div class="writeup-tags">
+          <span class="tech-tag">SSRF</span>
+          <span class="tech-tag">Command Injection</span>
+          <span class="tech-tag">Path Traversal</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
-        <div class="project-title">Unprotected Admin Functionality</div>
-        <p class="project-desc">
-          Analysis of broken access control vulnerabilities where administrative
-          functionality is exposed without proper authentication or authorization
-          enforcement, enabling privilege escalation attacks.
-        </p>
-        <div class="project-footer">
-          <div class="project-tech">
-            <span class="tech-tag">Access Control</span>
-            <span class="tech-tag">Privilege Escalation</span>
-            <span class="tech-tag">OWASP</span>
+      <!-- Unprotected Admin -->
+      <div class="writeup-card">
+        <div class="writeup-header">
+          <div>
+            <div class="project-badge badge-writeup" style="margin-bottom:0.8rem">6 Reports &nbsp;·&nbsp; Writeup</div>
+            <div class="writeup-title">Access Control & Authentication Vulnerabilities</div>
           </div>
           <a href="UnprotectedAdminFunc.pdf" target="_blank" class="project-link">PDF ↗</a>
         </div>
+        <ul class="vuln-list">
+          <li><span class="vuln-dot"></span>Unprotected Admin Functionality (×2)</li>
+          <li><span class="vuln-dot"></span>User Role Modification via User Profile</li>
+          <li><span class="vuln-dot"></span>Insecure Direct Object References (IDOR)</li>
+          <li><span class="vuln-dot"></span>Username Enumeration via Different Responses</li>
+          <li><span class="vuln-dot"></span>Two-Factor Authentication (2FA) Simple Bypass</li>
+          <li><span class="vuln-dot"></span>Password Reset Broken Logic</li>
+        </ul>
+        <div class="writeup-tags">
+          <span class="tech-tag">Access Control</span>
+          <span class="tech-tag">IDOR</span>
+          <span class="tech-tag">2FA Bypass</span>
+          <span class="tech-tag">Auth</span>
+        </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-badge badge-writeup">Web Vuln &nbsp;·&nbsp; Writeup</div>
-        <div class="project-title">Information Disclosure</div>
-        <p class="project-desc">
-          Comprehensive writeup on information disclosure vulnerabilities — where
-          applications unintentionally reveal sensitive data to users, including
-          source code, credentials, internal paths, and error messages.
-        </p>
-        <div class="project-footer">
-          <div class="project-tech">
-            <span class="tech-tag">Info Disclosure</span>
-            <span class="tech-tag">Recon</span>
-            <span class="tech-tag">OWASP</span>
+      <!-- Info Disclosure -->
+      <div class="writeup-card">
+        <div class="writeup-header">
+          <div>
+            <div class="project-badge badge-writeup" style="margin-bottom:0.8rem">9 Reports &nbsp;·&nbsp; Writeup</div>
+            <div class="writeup-title">Information Disclosure & Logic Vulnerabilities</div>
           </div>
           <a href="InfoDisclosure.pdf" target="_blank" class="project-link">PDF ↗</a>
+        </div>
+        <ul class="vuln-list">
+          <li><span class="vuln-dot"></span>Information Disclosure via Error Messages</li>
+          <li><span class="vuln-dot"></span>Information Disclosure via Debug Page</li>
+          <li><span class="vuln-dot"></span>Excessive Trust in Client-Side Controls</li>
+          <li><span class="vuln-dot"></span>High-Level Logic Vulnerability in Shopping Cart</li>
+          <li><span class="vuln-dot"></span>Password Reset Poisoning</li>
+          <li><span class="vuln-dot"></span>Host Header Authentication Bypass</li>
+          <li><span class="vuln-dot"></span>Remote Code Execution (RCE) via Web Shell Upload</li>
+          <li><span class="vuln-dot"></span>Web Shell Upload via Content-Type Restriction Bypass</li>
+          <li><span class="vuln-dot"></span>Exploiting an API Endpoint via Documentation Exposure</li>
+        </ul>
+        <div class="writeup-tags">
+          <span class="tech-tag">Info Disclosure</span>
+          <span class="tech-tag">Logic Flaws</span>
+          <span class="tech-tag">RCE</span>
+          <span class="tech-tag">API Security</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <span>Ramoel T. Bello</span> &nbsp;·&nbsp; 3BSIT-5 &nbsp;·&nbsp; S.Y. 2025–2026
+      <span>Ramoel T. Bello</span> &nbsp;·&nbsp; 4BSIT-3 &nbsp;·&nbsp; S.Y. 2025–2026
     </div>
     <div class="footer-right">
       Built with HTML/CSS &nbsp;·&nbsp; Hosted on Vercel
